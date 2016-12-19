@@ -13,7 +13,7 @@
         <!--Do It-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="ViewController" customModule="DoIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="TasksViewController" customModule="DoIt" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -46,11 +46,55 @@
                     <connections>
                         <outlet property="tableView" destination="G8v-A0-u6E" id="Gxs-eO-6sy"/>
                         <segue destination="FPE-F7-gYZ" kind="show" identifier="addSegue" id="OhC-qo-fhD"/>
+                        <segue destination="i67-aS-60d" kind="show" identifier="selectTaskSegue" id="zit-hm-WrO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1012" y="38.23088455772114"/>
+        </scene>
+        <!--Complete Task View Controller-->
+        <scene sceneID="nRC-mw-oIV">
+            <objects>
+                <viewController id="i67-aS-60d" customClass="CompleteTaskViewController" customModule="DoIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zYq-Z5-ufY"/>
+                        <viewControllerLayoutGuide type="bottom" id="259-6L-yWg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1O9-yv-knJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pg0-Ob-Iqt">
+                                <rect key="frame" x="157" y="94" width="61" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MkF-Xz-VxK">
+                                <rect key="frame" x="154" y="149" width="67" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Complete"/>
+                                <connections>
+                                    <action selector="completeTask:" destination="i67-aS-60d" eventType="touchUpInside" id="Edm-WJ-rcQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pg0-Ob-Iqt" firstAttribute="top" secondItem="zYq-Z5-ufY" secondAttribute="bottom" constant="30" id="Jo5-cV-j0h"/>
+                            <constraint firstItem="pg0-Ob-Iqt" firstAttribute="centerX" secondItem="1O9-yv-knJ" secondAttribute="centerX" id="SKe-iG-q7V"/>
+                            <constraint firstItem="MkF-Xz-VxK" firstAttribute="top" secondItem="pg0-Ob-Iqt" secondAttribute="bottom" constant="25" id="qIi-lx-SVS"/>
+                            <constraint firstItem="MkF-Xz-VxK" firstAttribute="centerX" secondItem="1O9-yv-knJ" secondAttribute="centerX" id="snY-k8-NH0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="taskLabel" destination="pg0-Ob-Iqt" id="dW5-8k-TJf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="grw-79-Ec5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1012" y="860"/>
         </scene>
         <!--Create Task View Controller-->
         <scene sceneID="fYJ-yN-Hot">
@@ -117,46 +161,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U2w-hk-I8I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1770" y="37"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="0Ba-yV-ufX">
-            <objects>
-                <viewController id="R30-FN-FH1" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="tBr-4T-bNa"/>
-                        <viewControllerLayoutGuide type="bottom" id="aVz-WH-YLD"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="B9K-Lt-paR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="What is your name?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z2q-Gk-ii9">
-                                <rect key="frame" x="103" y="20" width="151" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ekU-64-raK">
-                                <rect key="frame" x="130" y="86" width="97" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZRE-Ay-arg">
-                                <rect key="frame" x="117" y="194" width="140" height="122"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <state key="normal" title="Submit"/>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YSp-T1-vG3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2532" y="35.532233883058474"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Tbd-0x-ZNo">
