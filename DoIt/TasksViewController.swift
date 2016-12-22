@@ -15,20 +15,20 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // Create an array with Task objects
     var tasks : [Task] = []
     
-    // Create an index for selected task
-    var selectedIndex = 0
-    
-    
+    // this only runs once
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        // Add the tasks (task1, task2, etc) to the array
-        tasks = maketasks()
-        
+                
         // Look at own contents to specify what objects and how many rows to show
         tableView.dataSource = self
         tableView.delegate = self
+    }
+    
+    // this will run everytime the screen shows up
+    override func viewWillAppear(_ animated: Bool) {
+        getTasks()
+        tableView.reloadData()
     }
     
     // This tells you if you are running out of memory
@@ -47,9 +47,9 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = UITableViewCell()
         let task = tasks[indexPath.row]
         if task.important {
-            cell.textLabel?.text = "❗️ \(task.name)"
+            cell.textLabel?.text = "❗️ \(task.name!)"
         } else {
-            cell.textLabel?.text = task.name
+            cell.textLabel?.text = task.name!
         }
         
         return cell
@@ -57,45 +57,32 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // This selects the index number of the row in array of selected task
-        selectedIndex = indexPath.row
         
         let task = tasks[indexPath.row]
         performSegue(withIdentifier: "selectTaskSegue", sender: task)
         
     }
     
-    func maketasks() -> [Task] {
-        
-        let task1 = Task()
-        task1.name = "Walk the dog"
-        task1.important = false
-        
-        let task2 = Task()
-        task2.name = "Buy Cheese"
-        task2.important = true
-        
-        let task3 = Task()
-        task3.name = "Mow the lawn"
-        task3.important = false
-        
-        return [task1, task2, task3]
-    }
     
     @IBAction func plusTapped(_ sender: Any) {
         performSegue(withIdentifier: "addSegue", sender: nil)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "addSegue" {
-            let nextVC = segue.destination as! CreateTaskViewController
-            nextVC.previousVC = self
+    // get everything out of coredata and put it in the array called tasks
+    func getTasks() {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        do {
+            tasks = try context.fetch(Task.fetchRequest()) as! [Task]
+            print(tasks)
+        } catch {
+            print("OOPS WE HAVE A PROBLEM")
         }
-        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "selectTaskSegue" {
             let nextVC = segue.destination as! CompleteTaskViewController
-            nextVC.task = sender as! Task
-            nextVC.previousVC = self
+            nextVC.task = sender as? Task
         }
     }
 }
